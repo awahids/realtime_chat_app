@@ -7,10 +7,14 @@
         <strong>{{ message.userName }}:</strong> {{ message.content }}
       </li>
     </ul>
+    <MessageForm :roomId="roomId"
+      @message-sent="handleMessageSent" />
   </div>
 </template>
 
 <script>
+import MessageForm from './MessageForm.vue';
+
 export default {
   props: ['roomId'],
   data() {
@@ -44,7 +48,13 @@ export default {
           }
         }
       );
+    },
+    handleMessageSent(data) {
+      this.messages.push(data);
     }
+  },
+  components: {
+    MessageForm
   }
 }
 </script>

@@ -1,8 +1,10 @@
+// application.js
 import { createApp } from 'vue';
-import App from '../app.vue';
+import App from '../App.vue';
+import router from '../router/router';
 
-const app = createApp({
-  render: () => App
+document.addEventListener('DOMContentLoaded', () => {
+  const app = createApp(App);
+  app.use(router);
+  app.mount('#app');
 });
-
-app.mount('#app');

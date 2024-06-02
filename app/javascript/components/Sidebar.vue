@@ -3,9 +3,8 @@
     <h2>Rooms</h2>
     <ul>
       <li v-for="room in rooms"
-        :key="room.id"
-        @click="selectRoom(room.id)">
-        {{ room.name }}
+        :key="room.id">
+        <a :href="'/chatroom/' + room.id">{{ room.name }}</a>
       </li>
     </ul>
   </div>
@@ -22,15 +21,14 @@ export default {
     this.fetchRooms();
   },
   methods: {
-    fetchRooms() {
-      fetch('/rooms')
-        .then(response => response.json())
-        .then(data => {
-          this.rooms = data;
-        });
-    },
-    selectRoom(roomId) {
-      this.$emit('room-selected', roomId);
+    async fetchRooms() {
+      try {
+        const response = await fetch('/rooms');
+        const data = await response.json();
+        this.rooms = data;
+      } catch (error) {
+        console.error('Error fetching rooms:', error);
+      }
     }
   }
 }

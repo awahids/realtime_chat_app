@@ -31,6 +31,8 @@ gem "redis", ">= 4.0.1"
 
 gem 'webpacker', '~> 5.0'
 
+gem 'rack-cors'
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 

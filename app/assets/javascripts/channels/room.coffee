@@ -1,10 +1,10 @@
 App.room = App.cable.subscriptions.create "RoomChannel",
   connected: ->
-    # Called when the subscription is ready for use on the server
+    # Dipanggil ketika langganan siap digunakan di server
 
   disconnected: ->
-    # Called when the subscription has been terminated by the server
+    # Dipanggil ketika langganan telah diakhiri oleh server
 
   received: (data) ->
-    # Called when there's incoming data on the websocket for this channel
+    # Dipanggil ketika ada data masuk pada websocket untuk saluran ini
     $('#messages').append "<p><b>#{data.message.userName}:</b> #{data.message.content}</p>"

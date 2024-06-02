@@ -7,6 +7,7 @@
       v-model="newMessage"
       @keyup.enter="sendMessage"
       placeholder="Type a message" />
+    <button @click="sendMessage">Kirim</button>
   </div>
 </template>
 
@@ -33,9 +34,17 @@ export default {
           userName: this.userName
         })
       })
-        .then(response => response.json())
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
         .then(data => {
           this.$emit('message-sent', data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
         });
       this.newMessage = '';
     }
@@ -54,8 +63,18 @@ export default {
 }
 
 .message-form input {
-  width: 100%;
+  width: 80%;
   padding: 0.5rem;
   font-size: 1rem;
+}
+
+.message-form button {
+  width: 20%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 </style>

@@ -1,22 +1,39 @@
 <template>
   <div id="app">
-    <p>{{ message }}</p>
+    <Sidebar @room-selected="onRoomSelected" />
+    <Chatroom :roomId="selectedRoomId" />
+    <MessageForm :roomId="selectedRoomId"
+      @message-sent="onMessageSent" />
   </div>
 </template>
 
 <script>
+import Chatroom from './components/Chatroom.vue';
+import MessageForm from './components/MessageForm.vue';
+import Sidebar from './components/Sidebar.vue';
+
 export default {
-  data: function () {
+  components: {
+    Chatroom,
+    MessageForm,
+    Sidebar
+  },
+  data() {
     return {
-      message: "Hello Vue!"
+      selectedRoomId: null
+    };
+  },
+  methods: {
+    onRoomSelected(roomId) {
+      this.selectedRoomId = roomId;
+    },
+    onMessageSent(data) {
+      // Handle message sent event, if needed
     }
   }
 }
 </script>
 
-<style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
+<style>
+/* Add global styles here, if any */
 </style>
