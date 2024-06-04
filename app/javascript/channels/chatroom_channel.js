@@ -1,3 +1,4 @@
+// Import consumer from "./consumer"
 import consumer from "./consumer"
 
 const initChatroomCable = () => {
@@ -7,7 +8,14 @@ const initChatroomCable = () => {
 
     consumer.subscriptions.create({ channel: "ChatroomChannel", chatroom_id: chatroomId }, {
       received(data) {
+        // Ambil kontainer pesan
+        const messagesContainer = document.getElementById('messages');
+        if (!messagesContainer) return;
+
+        // Tambahkan pesan baru
         messagesContainer.insertAdjacentHTML('beforeend', data.message);
+
+        // Gulir ke bawah
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
       },
     });
