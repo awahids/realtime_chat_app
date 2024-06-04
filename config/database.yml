@@ -16,4 +16,5 @@ test:
 
 production:
   <<: *default
-  database: realtime_chat
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] =%>
