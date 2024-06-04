@@ -1,26 +1,30 @@
 class MessagesController < ApplicationController
-  # Menampilkan semua pesan untuk ruangan tertentu
-  def index
-    @messages = Message.where(room_id: params[:room_id])
-    render json: @messages
-  end
-
-  # Membuat pesan baru
+  skip_before_action :verify_authenticity_token, only: [:create]
   def create
-    @message = Message.new(message_params)
+    @chatroom = Chatroom.find(params[:chatroom_id])
+    @message = @chatroom.messages.build(message_params)
+
     if @message.save
-      ActionCable.server.broadcast "room_#{@message.room_id}_channel",
-        message: @message
-      render json: @message, status: :created
+      respond_to do |format|
+        format.html { redirect_to @chatroom }
+        format.json { render json: @message, status: :created }
+      end
+      ActionCable.server.broadcast "chatroom_channel_#{@chatroom.id}", message: render_message(@message)
     else
-      render json: @message.errors, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { redirect_to @chatroom, alert: 'Pesan tidak dapat dikirim' }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   private
 
-  # Memperbolehkan parameter yang diterima
   def message_params
-    params.require(:message).permit(:room_id, :content, :user_name)
+    params.require(:message).permit(:username, :content)
+  end
+
+  def render_message(message)
+    ApplicationController.renderer.render(partial: 'messages/message', locals: { message: message })
   end
 end

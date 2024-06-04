@@ -1,4 +1,6 @@
 class Message < ApplicationRecord
-  belongs_to :room
-  after_create_commit { MessageBroadcastJob.perform_later(self) }
+  belongs_to :chatroom
+
+  validates :username, presence: true
+  validates :content, presence: true
 end
