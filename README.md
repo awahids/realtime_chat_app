@@ -1,5 +1,6 @@
 ### Realtime Chat App README
 ![Demo](https://raw.githubusercontent.com/awahids/realtime_chat_app/staging/public/img/demo.gif)
+[Demo](https://nutty-margalo-awhds-6b63d3b6.koyeb.app/chatroom/1)
 
 #### Overview
 
@@ -98,6 +99,6 @@ This project is licensed under the [MIT License](LICENSE). Feel free to use, mod
 
 #### Author
 
-This Realtime Chat App was created by [Your Name]. You can contact me at [awahid.safhadi@gmail.com] for any inquiries or feedback.
+This Realtime Chat App was created by [AW](awahids.my.id). You can contact me at [awahid.safhadi@gmail.com] for any inquiries or feedback.
 
 ![Dashboard](https://raw.githubusercontent.com/awahids/realtime_chat_app/staging/public/img/dashboard.png)
