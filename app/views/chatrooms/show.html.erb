@@ -2,6 +2,14 @@
   <div class="row">
     <div class="col-md-3 bg-dark text-white sidebar">
       <h2 class="p-3">Chatroom</h2>
+      <!-- form action="#" method="get" class="p-3" id="searchForm">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Search chatroom" id="searchInput">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+          </div>
+        </div>
+      </form -->
       <ul class="list-group list-group-flush">
         <% @chatrooms.each do |chatroom| %>
           <li class="list-group-item bg-dark text-white">
@@ -9,12 +17,13 @@
           </li>
         <% end %>
       </ul>
+      <!-- 
       <div class="p-3">
         <%= form_with(url: chatrooms_path, method: :post, local: true) do |form| %>
           <%= form.text_field :name, placeholder: "Enter chatroom name", class: "form-control" %>
           <%= form.submit "Create", class: "btn btn-primary mt-2" %>
         <% end %>
-      </div>
+      </div> -->
     </div>
     <div class="col-md-9">
       <div class="chatroom-messages p-3" id="messages" data-chatroom-id="<%= @chatroom.id %>">
